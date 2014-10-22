@@ -1,0 +1,87 @@
+<html>
+<head>
+	<title>Kanban Board - APS</title>
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<script type="text/javascript">
+		
+
+			function novaColuna() {
+				document.querySelector("#menu-tasks").innerHTML +=
+					"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul class=\"lista-conteudo\" id=\"lista-conteudo\"><li class=\"item-lista\"></li></ul></div></div></li>";
+					//"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul></ul></div></div></li>";
+			}
+
+			function dropColuna() {
+			  var ultimoFilho = document.getElementById("menu-tasks").lastChild;
+			  document.getElementById("menu-tasks").removeChild(ultimoFilho);
+			}
+			
+			function newTask() {
+				document.querySelector("#lista-conteudo").innerHTML += "<li class=\"item-lista\"><div class=\"task\">teste</div></li>";
+			}	
+			
+			function dropTask() {
+				document.querySelector()
+			}
+	</script>
+</head>
+<body>
+
+	<div class="corpo-principal">
+		<div class="container">
+			<header class="header-cabecalho">
+				<div class="header-logo">
+					<span>Kanban Board - APS</span>
+				</div>
+
+				<div class="header-menu">
+					<ul class="menu-lista">
+						<li><input class="menu-button" id="new-task" type="button" value="Nova Tarefa" onClick="newTask()"></li>
+						<li><input class="menu-button" id="new-column" type="button" value="Nova Coluna" onClick="novaColuna()"></li>
+						<li><input class="menu-button" id="drop-column" type="button" value="Excluir Coluna" onClick="dropColuna()"></li>
+					</ul>
+				</div>
+			</header>
+
+			<section class="corpo-conteudo">
+				<ul class="menu-lista" id="menu-tasks">
+                <!-- Estrutura criada com new column - Inicio -->
+					<li>
+						<div class="column">
+							<div class="column-name">Teste</div>
+							<div class="column-conteudo">
+                            	<ul class="lista-conteudo" id="lista-conteudo">
+                            		<li class="item-lista">
+                                		<div class="task">teste</div>
+	                                </li>
+                                </ul>
+                            </div>
+						</div>
+					</li>
+                <!-- Fim -->
+					<li>
+						<div class="column">
+							<div class="column-name">Teste</div>
+							<div class="column-conteudo"><ul></ul></div>
+						</div>
+					</li>
+					<li>
+						<div class="column">
+							<div class="column-name">Teste</div>
+							<div class="column-conteudo"><ul></ul></div>
+						</div>
+					</li>
+				</ul>
+			</section>
+
+			<footer>
+				<h1>FOOTER</h1>
+			</footer>
+		</div>
+	</div>
+
+</body>
+</html>
