@@ -1,31 +1,98 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Kanban Board - APS</title>
-
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	
+
 	<script type="text/javascript">
-		
+		function novaColuna() {
+			document.querySelector("#menu-tasks").innerHTML +=
+				"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul class=\"lista-conteudo\" id=\"lista-conteudo\"><li class=\"item-lista\"></li></ul></div></div></li>";
+				//"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul></ul></div></div></li>";
+		}
 
-			function novaColuna() {
-				document.querySelector("#menu-tasks").innerHTML +=
-					"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul class=\"lista-conteudo\" id=\"lista-conteudo\"><li class=\"item-lista\"></li></ul></div></div></li>";
-					//"<li><div class=\"column\"><div class=\"column-name\">Teste</div><div class=\"column-conteudo\"><ul></ul></div></div></li>";
+		function dropColuna() {
+			var ultimoFilho = document.querySelector("#menu-tasks").lastChild;
+			document.querySelector("#menu-tasks").removeChild(ultimoFilho);
+		}
+
+		function newTask() {
+			document.querySelector("#lista-conteudo").innerHTML += "<li class=\"item-lista\" draggable=\"true\"><div class=\"task\">teste</div></li>";
+		}
+
+		function dropTask() {
+			document.querySelector();
+		}
+
+		window.onload = function (){
+			var xpto = null;
+
+			function arrasteInicio(e){
+				this.style.opacity = '0.4';
+
+				xpto = this;
+
+				e.dataTransfer.effectAllowed = 'move';
+				e.dataTransfer.setData('text/html', this.innerHTML);
+
+				var pai = this.parentNode.innerHTML;
+				//alert("Pai\n" + pai + "\n\nFilho\n" + this.innerHTML);
 			}
 
-			function dropColuna() {
-			  var ultimoFilho = document.getElementById("menu-tasks").lastChild;
-			  document.getElementById("menu-tasks").removeChild(ultimoFilho);
+			function arrasteEntra(e){
+				this.classList.add('over');
+			}			
+
+			function arrasteDeixa(e){
+				this.classList.remove('over');
 			}
-			
-			function newTask() {
-				document.querySelector("#lista-conteudo").innerHTML += "<li class=\"item-lista\"><div class=\"task\">teste</div></li>";
-			}	
-			
-			function dropTask() {
-				document.querySelector()
+
+			function arrasteSobre(e){
+				if (e.preventDefault){
+					e.preventDefault();
+				}
+				
+				e.dataTransfer.dropEffect = 'move';
+				return false;
 			}
+
+			function solte(e){
+				if (e.stopPropagation) {
+					e.stopPropagation();
+				}
+				
+				this.innerHTML = e.dataTransfer.getData('text/html');
+				this.style.opacity = '1';
+				
+				if(xpto != this) {
+					alert("Solte\n" + xpto.innerHTML);
+					xpto.innerHTML = null;
+					//xpto.innerHTML = this.innerHTML;
+					this.innerHTML = e.dataTransfer.getData('text/html');
+				}
+				
+				return false;
+			}			
+
+			function arrasteFim(e){
+				[].forEach.call(cols, function (col) {
+					col.classList.remove('over');
+					
+					//alert("arrastefim");
+				});
+			}
+
+			var cols = document.querySelectorAll(".item-lista");
+			[].forEach.call(cols, function(col){
+				col.addEventListener('dragstart', arrasteInicio, false);
+				col.addEventListener('dragenter', arrasteEntra, false);
+				col.addEventListener('dragleave', arrasteDeixa, false);
+				col.addEventListener('dragover', arrasteSobre, false);
+				col.addEventListener('drop', solte, false);
+				col.addEventListener('dragend', arrasteFim, false);
+			});	
+		}
 	</script>
 </head>
 <body>
@@ -55,9 +122,13 @@
 							<div class="column-conteudo">
                             	<ul class="lista-conteudo" id="lista-conteudo">
                             		<li class="item-lista">
-                                		<div class="task">teste</div>
+										<div class="task" draggable="true">teste1</div>
 	                                </li>
-                                </ul>
+
+                            		<li class="item-lista">
+										<div class="task" draggable="true">teste2</div>
+	                                </li>
+								</ul>
                             </div>
 						</div>
 					</li>
@@ -65,7 +136,11 @@
 					<li>
 						<div class="column">
 							<div class="column-name">Teste</div>
-							<div class="column-conteudo"><ul></ul></div>
+							<div class="column-conteudo">
+								<ul>
+									<li class="item-lista">	</li>
+								</ul>
+							</div>
 						</div>
 					</li>
 					<li>
