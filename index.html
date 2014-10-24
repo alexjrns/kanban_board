@@ -17,11 +17,11 @@
 			document.querySelector("#menu-tasks").removeChild(ultimoFilho);
 		}
 
-		function newTask() {
-			document.querySelector("#lista-conteudo").innerHTML += "<li class=\"item-lista\" draggable=\"true\"><div class=\"task\">teste</div></li>";
+		function novaTarefa() {
+			document.querySelector("#lista-conteudo").innerHTML += "<li class=\"item-lista\" draggable=\"true\"><div class=\"task\"><input type='text' class='titulo-editavel' placeholder='Nova tarefa' /></div></li>";
 		}
 
-		function dropTask() {
+		function dropTarefa() {
 			document.querySelector();
 		}
 
@@ -34,10 +34,9 @@
 				xpto = this;
 
 				e.dataTransfer.effectAllowed = 'move';
-				e.dataTransfer.setData('text/html', this.innerHTML);
-
-				var pai = this.parentNode.innerHTML;
-				//alert("Pai\n" + pai + "\n\nFilho\n" + this.innerHTML);
+				e.dataTransfer.setData('text/html', this.outerHTML);
+				console.log("esse: " + this);
+				console.log("esse out: " + this.outerHTML);
 			}
 
 			function arrasteEntra(e){
@@ -66,7 +65,7 @@
 				this.style.opacity = '1';
 				
 				if(xpto != this) {
-					alert("Solte\n" + xpto.innerHTML);
+					console.log("Solte\n" + xpto.innerHTML);
 					xpto.innerHTML = null;
 					//xpto.innerHTML = this.innerHTML;
 					this.innerHTML = e.dataTransfer.getData('text/html');
@@ -86,11 +85,21 @@
 			var cols = document.querySelectorAll(".item-lista");
 			[].forEach.call(cols, function(col){
 				col.addEventListener('dragstart', arrasteInicio, false);
-				col.addEventListener('dragenter', arrasteEntra, false);
-				col.addEventListener('dragleave', arrasteDeixa, false);
-				col.addEventListener('dragover', arrasteSobre, false);
-				col.addEventListener('drop', solte, false);
-				col.addEventListener('dragend', arrasteFim, false);
+				//col.addEventListener('dragenter', arrasteEntra, false);
+				//col.addEventListener('dragleave', arrasteDeixa, false);
+				//col.addEventListener('dragover', arrasteSobre, false);
+				//col.addEventListener('drop', solte, false);
+				//col.addEventListener('dragend', arrasteFim, false);
+			});	
+			
+			var uls = document.querySelectorAll(".column-conteudo");
+			[].forEach.call(uls, function(lsta){
+				//lsta.addEventListener('dragstart', arrasteInicio, false);
+				lsta.addEventListener('dragenter', arrasteEntra, false);
+				lsta.addEventListener('dragleave', arrasteDeixa, false);
+				lsta.addEventListener('dragover', arrasteSobre, false);
+				lsta.addEventListener('drop', solte, false);
+				lsta.addEventListener('dragend', arrasteFim, false);
 			});	
 		}
 	</script>
@@ -106,7 +115,7 @@
 
 				<div class="header-menu">
 					<ul class="menu-lista">
-						<li><input class="menu-button" id="new-task" type="button" value="Nova Tarefa" onClick="newTask()"></li>
+						<li><input class="menu-button" id="new-task" type="button" value="Nova Tarefa" onClick="novaTarefa()"></li>
 						<li><input class="menu-button" id="new-column" type="button" value="Nova Coluna" onClick="novaColuna()"></li>
 						<li><input class="menu-button" id="drop-column" type="button" value="Excluir Coluna" onClick="dropColuna()"></li>
 					</ul>
@@ -118,15 +127,21 @@
                 <!-- Estrutura criada com new column - Inicio -->
 					<li>
 						<div class="column">
-							<div class="column-name">Teste</div>
+							<div class="column-name">
+								<input type="text" class="titulo-editavel" placeholder="Coluna1" />
+							</div>
 							<div class="column-conteudo">
                             	<ul class="lista-conteudo" id="lista-conteudo">
-                            		<li class="item-lista">
-										<div class="task" draggable="true">teste1</div>
+                            		<li class="item-lista" draggable="true">
+										<div class="task">
+											<input type="text" class="titulo-editavel" placeholder="Tarefa1" />
+										</div>
 	                                </li>
 
-                            		<li class="item-lista">
-										<div class="task" draggable="true">teste2</div>
+                            		<li class="item-lista" draggable="true">
+										<div class="task">
+											<input type="text" class="titulo-editavel" placeholder="Tarefa2" />
+										</div>
 	                                </li>
 								</ul>
                             </div>
@@ -135,7 +150,9 @@
                 <!-- Fim -->
 					<li>
 						<div class="column">
-							<div class="column-name">Teste</div>
+							<div class="column-name">
+								<input type="text" class="titulo-editavel" placeholder="Coluna2" />
+							</div>
 							<div class="column-conteudo">
 								<ul>
 									<li class="item-lista">	</li>
@@ -145,7 +162,9 @@
 					</li>
 					<li>
 						<div class="column">
-							<div class="column-name">Teste</div>
+							<div class="column-name">
+								<input type="text" class="titulo-editavel" placeholder="Coluna3" />
+							</div>
 							<div class="column-conteudo"><ul></ul></div>
 						</div>
 					</li>

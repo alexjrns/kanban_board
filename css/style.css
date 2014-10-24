@@ -1,4 +1,4 @@
-input[type=button]{
+input[type=button] {
 	transition: background-color 0.5s ease 0s;
 	color: #FFF;
 	background-color: #428BCA;
@@ -8,26 +8,32 @@ input[type=button]{
 	cursor: pointer;
 }
 
-input[type=button]:hover{
+input[type=button]:hover {
 	background-color: #3071a9;
 }
 
-.over{
+.over {
 	border: 3px dashed #000;
 }
 
 [draggable] {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  /* Required to make elements draggable in old WebKit */
-  -khtml-user-drag: element;
-  -webkit-user-drag: element;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	/* Required to make elements draggable in old WebKit */
+	-khtml-user-drag: element;
+	-webkit-user-drag: element;
 }
 
 div {
 	display: block;
+}
+
+.titulo-editavel {
+	border: 0;
+	text-align: center;
+	width: 98%;
 }
 
 .item-lista {
@@ -35,8 +41,8 @@ div {
 }
 
 .task {
-	width:150px;
-	margin-left:25px;
+	width: 90%;
+	margin-left: 5%;
 	margin-top:10px;
 	height:150px;
 	background-color: #FFC;
